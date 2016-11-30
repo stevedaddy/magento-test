@@ -151,3 +151,6 @@ skin/frontend/default/modern/
 skin/frontend/enterprise
 skin/install/
 var/
+app/code/local/SilkSoftware
+app/code/community/MasteringMagento
+app/code/local/MasteringMagento

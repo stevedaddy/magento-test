@@ -163,3 +163,4 @@ var/
 .idea/magento-test.iml
 .idea/encodings.xml
 .idea/magicento/layout_frontend.xml
+app/code/local/Atwix/Cmsattr/Model/steve.php

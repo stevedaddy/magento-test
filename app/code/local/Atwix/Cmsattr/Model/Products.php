@@ -43,23 +43,51 @@ class Atwix_Cmsattr_Model_Products extends Mage_Catalog_Model_Product
             switch ($valueId) {
                 case '5':
                     $podId = '18';
+                    $showFilter = array('eq' => $podId);
+                    $groupBy = 'coffee_flavor';
+                    $collection
+                        ->addAttributeToSelect('*')
+                        ->addAttributeToFilter('pods_product_type', $showFilter)
+                        ->addAttributeToFilter('coffee_flavor', array('notnull' => true));
                     break;
                 case '4':
                     $podId = '19';
+                    $showFilter = array('eq' => $podId);
+                    $groupBy = 'coffee_flavor';
+                    $collection
+                        ->addAttributeToSelect('*')
+                        ->addAttributeToFilter('pods_product_type', $showFilter)
+                        ->addAttributeToFilter('coffee_flavor', array('notnull' => true));
                     break;
                 case '3':
                     $podId = '20';
+                    $showFilter = array('eq' => $podId);
+                    $groupBy = 'coffee_flavor';
+                    $collection
+                        ->addAttributeToSelect('*')
+                        ->addAttributeToFilter('pods_product_type', $showFilter)
+                        ->addAttributeToFilter('coffee_flavor', array('notnull' => true));
+                    break;
+                case '9999':
+                    $showFilter = array('notnull' => true);
+                    $groupBy = 'entity_id';
                     break;
                 default:
                     $podId = '19';
+                    $showFilter = array('eq' => $podId);
+                    $groupBy = 'coffee_flavor';
+                    $collection
+                        ->addAttributeToSelect('*')
+                        ->addAttributeToFilter('pods_product_type', $showFilter)
+                        ->addAttributeToFilter('coffee_flavor', array('notnull' => true));
             }
             $collection
                 ->addAttributeToSelect('*')
-                ->addAttributeToFilter('pods_product_type', array('eq' => $podId))
-                ->addAttributeToFilter('coffee_flavor', array('in' => array(6,7,8,9,10)))
+//                ->addAttributeToFilter('pods_product_type', $showFilter)
+//                ->addAttributeToFilter('coffee_flavor', array('notnull' => true))
                 //Group by flavor after making sure they're all assigned a flavor,
                 //so it just cuts out the more expensive ones
-                ->groupByAttribute('coffee_flavor')
+                ->groupByAttribute($groupBy)
               //  ->addAttributeToFilter('price', array('lt' => 10))
                 ->setOrder('price', 'ASC')
                 ->getSelect();

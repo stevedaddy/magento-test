@@ -151,3 +151,15 @@ skin/frontend/default/modern/
 skin/frontend/enterprise
 skin/install/
 var/
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/magicento.xml
+.idea/scopes/scope_settings.xml
+.idea/magicento/config.xml
+.idea/misc.xml
+.idea/.name
+.idea/magicento/adminhtml.xml
+.idea/magento-test.iml
+.idea/encodings.xml
+.idea/magicento/layout_frontend.xml

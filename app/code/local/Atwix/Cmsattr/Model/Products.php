@@ -1,13 +1,12 @@
 <?php
 class Atwix_Cmsattr_Model_Products extends Mage_Catalog_Model_Product
 {
+
     public function getItemsCollection($valueId,$podsProductType,$product_id)
     {
         //uses $valueId to load dif related product_type
         $collection = $this->getCollection();
-
         if(!$valueId){
-
             // 4 = small machine
             // 19 = small pods
 
@@ -37,6 +36,7 @@ class Atwix_Cmsattr_Model_Products extends Mage_Catalog_Model_Product
                 ->addAttributeToFilter('product_type', array('eq' => $prodId))
                 ->getSelect()->limit(5);
         }
+
         else{
             //turn this into a loop, get rid of it being twice,
             // this is hacky code for sure, must be fixed
@@ -56,19 +56,24 @@ class Atwix_Cmsattr_Model_Products extends Mage_Catalog_Model_Product
             $collection
                 ->addAttributeToSelect('*')
                 ->addAttributeToFilter('pods_product_type', array('eq' => $podId))
-                ->getSelect()->limit(5);
-
+                ->addAttributeToFilter('coffee_flavor', array('in' => array(6,7,8,9,10)))
+                //Group by flavor after making sure they're all assigned a flavor,
+                //so it just cuts out the more expensive ones
+                ->groupByAttribute('coffee_flavor')
+              //  ->addAttributeToFilter('price', array('lt' => 10))
+                ->setOrder('price', 'ASC')
+                ->getSelect();
         }
         //filter featured product from being displayed in its own cross sells
-        $collection
-            ->addAttributeToSelect('entity_id')
-            ->addAttributeToFilter('entity_id', array('neq' => $product_id));
+//        $collection
+//            ->addAttributeToSelect('entity_id')
+//            ->addAttributeToFilter('entity_id', array('neq' => $product_id));
 
         Mage::getSingleton('cataloginventory/stock')->addInStockFilterToCollection($collection);
 
-        echo 'current pods_product_type: ' . $podsProductType;
-        echo '<br>current product_type: ' . $valueId;
-        echo '<br>current id: ' . $product_id;
+//        echo 'current pods_product_type: ' . $podsProductType;
+//        echo '<br>current product_type: ' . $valueId;
+//        echo '<br>current id: ' . $product_id;
 
         return $collection;
     }
